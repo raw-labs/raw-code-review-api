@@ -1,0 +1,22 @@
+raw: "0.10"
+endpoint: GET
+metadata:
+  title: Retrieve Jira issues without PR.
+  description: Retrieves Jira issues without an associated open pull request, based on specified parameters.
+  tags:
+    - code_review
+    - issue
+    - no_pull_requests
+    - github
+    - jira
+code: sql
+codeFile: jira_issues-without-pr.sql
+format: json
+security:
+  public: false
+  scopes:
+    - code-review:read
+    - code-review:admin
+    - template:admin
+computeClass: normal
+enabled: true

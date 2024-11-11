@@ -1,0 +1,23 @@
+raw: "0.10"
+endpoint: GET
+metadata:
+  title: Get GitHub PR Reviewers.
+  description: Returns information about the reviewers of a specific GitHub pull request, including their GitHub user URL, avatar URL, association, ability to push to the repository, and username.
+  tags:
+    - code_review
+    - issue
+    - github_pull_request
+    - reviewer
+    - github
+    - jira
+code: sql
+codeFile: reviewers.sql
+format: json
+security:
+  public: false
+  scopes:
+    - code-review:read
+    - code-review:admin
+    - template:admin
+computeClass: normal
+enabled: true
