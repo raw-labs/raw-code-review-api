@@ -1,15 +1,15 @@
 raw: "0.10"
 endpoint: GET
 metadata:
-  title: Open PRs with Jira info.
-  description: Retrieves open GitHub pull requests with related Jira issues, filtered by username, Jira key, and created within the last month.
+  title: Search GitHub Pull Requests.
+  description: Retrieves GitHub Pull Requests related to Jira issues, filtered by various parameters and sorted by PR number. Supports pagination.
   tags:
     - code_reviewer
     - open_pull_requests
     - github
     - jira
 code: sql
-codeFile: open-pull-requests.sql
+codeFile: github-pull-requests.sql
 format: json
 security:
   public: false

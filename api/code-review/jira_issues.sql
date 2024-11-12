@@ -41,7 +41,7 @@ WITH prs AS (
     upper(github_pull_request.state) = 'OPEN'
     AND github_pull_request.repository_full_name=:github_repository_full_name
 ),
-jira_no_pr AS (
+jira_base AS (
   SELECT
     jira_issue."key" AS jira_issue_key,
     jira_issue.summary AS jira_summary,
@@ -79,6 +79,6 @@ jira_no_pr AS (
     )
 )
 SELECT *
-FROM jira_no_pr
+FROM jira_base
 ORDER BY jira_issue_key DESC
 LIMIT COALESCE(:page_size, 15) OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 15);
