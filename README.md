@@ -1,3 +1,5 @@
+---
+
 # 🛠️ **Code Reviewer API**
 
 ## Table of Contents
@@ -31,70 +33,57 @@
 
 ### Description
 
-This repository provides a **Code Reviewer API Template** for integrating data from **Salesforce**, **Jira**, and **Confluence** into the RAW Labs platform. It demonstrates how to retrieve and manipulate code review-related data using SQL queries on these platforms within RAW Labs. This API serves as a foundation for developers and support teams to access comprehensive code review information, enhancing collaboration and efficiency.
+This repository provides a **Code Reviewer API template** for integrating data from **GitHub** and **Jira** into the RAW Labs platform. It demonstrates how to retrieve and manipulate code review data using SQL queries on GitHub repositories and Jira issues within RAW Labs. This API serves as a showcase of RAW Labs' capability to seamlessly integrate multiple data sources, highlighting its flexibility and adaptability for enhancing code review processes.
 
 ### How It Works
 
-The RAW Labs platform enables the creation of APIs by writing SQL queries that access data from various sources, including Salesforce, Jira, and Confluence, using Steampipe's schemas. RAW Labs employs a Data Access Service (DAS) architecture to connect to multiple origin servers and data sources, allowing seamless, real-time data retrieval without data replication. This API template showcases how RAW Labs interacts with Salesforce for account data, Jira for issue tracking, and Confluence for documentation, providing a unified view essential for effective code reviewing.
+The RAW Labs platform enables the creation of APIs by writing SQL queries that can access data from various data sources, including GitHub and Jira. Utilizing Steampipe's schemas for these platforms, RAW Labs facilitates real-time data retrieval without the need for data replication. This API template illustrates how RAW Labs interacts with GitHub for pull request management and Jira for issue tracking, providing a unified view of code reviews and related tasks.
 
 ### Features
 
-- **Real-Time Data Access**: Query code review data in real-time without data replication.
+- **Real-Time Data Access**: Query Jira issues and GitHub pull requests in real-time without data replication.
 - **Template Queries**: Utilize predefined queries for common code review operations.
-- **Data Integration**: Combine data from Salesforce, Jira, and Confluence supported by RAW Labs.
-- **Demonstration of Flexibility**: Highlights RAW Labs' capability to integrate diverse data sources, emphasizing adaptability to various data schemas and optimized data retrieval.
+- **Data Integration**: Combine data from Jira and GitHub to gain comprehensive insights into code review processes.
+- **Enhanced Reporting**: Generate detailed reports on pull request comments, reviews, and associated Jira issues.
+- **Demonstration of Flexibility**: Showcases RAW Labs' ability to proxy multiple data sources, emphasizing adaptability to various workflows and data schemas.
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Salesforce Account**:
-  - Access to a Salesforce workspace with relevant account and issue data.
-  - Necessary permissions to read data from Salesforce tables.
-  
 - **Jira Account**:
-  - Access to a Jira instance with issue tracking enabled.
+  - Access to a Jira workspace with relevant repositories and issues.
   - Necessary permissions to read data from Jira projects and issues.
-  
-- **Confluence Account**:
-  - Access to a Confluence space containing knowledge base articles.
-  - Necessary permissions to read data from Confluence pages.
-  
+- **GitHub Account**:
+  - Access to GitHub repositories with pull requests.
+  - Necessary permissions to read data from GitHub repositories.
 - **RAW Labs Account**:
   - An active RAW Labs account. [Sign up here](https://app.raw-labs.com/register) if you don't have one.
-  
 - **Permissions**:
-  - **Salesforce**:
-    - API access enabled.
   - **Jira**:
     - API access enabled.
-  - **Confluence**:
-    - API access enabled.
+  - **GitHub**:
+    - Personal access tokens with appropriate scopes (e.g., `repo`, `read:org`).
   - **RAW Labs**:
     - Admin role to your RAW Labs account.
-  
 - **Dependencies**:
-  - Web browser to access RAW Labs, Salesforce, Jira, and Confluence.
+  - Web browser to access RAW Labs, Jira, and GitHub.
   - Internet connectivity.
 
 ### Setup Instructions
 
-1. **Configure Data Source Connections in RAW Labs**:
-   - Follow the instructions in the [RAW Labs Salesforce Data Source documentation](https://docs.raw-labs.com/sql/data-sources/salesforce) to set up your Salesforce connection.
-   - Similarly, set up connections for [Jira](https://docs.raw-labs.com/sql/data-sources/jira) and [Confluence](https://docs.raw-labs.com/sql/data-sources/confluence).
+1. **Configure Jira and GitHub Connections in RAW Labs**:
+   - Follow the instructions in the [RAW Labs Jira Data Source documentation](https://docs.raw-labs.com/sql/data-sources/jira) and [RAW Labs GitHub Data Source documentation](https://docs.raw-labs.com/sql/data-sources/github) to set up your Jira and GitHub connections.
 
 2. **Clone the Repository**:
-   - Clone this repository into your RAW Labs workspace:
-     ```bash
-     git clone https://github.com/your-repo/code-reviewer-api.git
-     ```
+   - Clone this repository into your RAW Labs workspace.
 
 3. **Review SQL and YAML Files**:
    - Examine the provided `.sql` and `.yml` files.
    - Each SQL file contains a query, and each YAML file configures the corresponding API endpoint.
 
 4. **Customize the Queries**:
-   - Adjust the SQL queries to fit your Salesforce, Jira, and Confluence datasets if necessary.
+   - Adjust the SQL queries to fit your Jira and GitHub datasets if necessary.
    - Modify filters, parameters, or entities according to your data schema.
 
 5. **Deploy APIs in RAW Labs**:
@@ -108,25 +97,27 @@ The RAW Labs platform enables the creation of APIs by writing SQL queries that a
 
 ### Entities Overview
 
-The template focuses on key code review-related entities typically found across Salesforce, Jira, and Confluence:
+The template focuses on key code review entities typically found in software development workflows:
 
-- **Account (Salesforce)**: Represents clients or internal teams involved in code projects.
-- **Issue (Jira)**: Represents code review tasks, bugs, feature requests, and other work items.
-- **Epic (Jira)**: Represents larger code projects or initiatives under which multiple issues fall.
-- **Knowledge Base Article (Confluence)**: Documentation and troubleshooting guides related to code projects.
-- **Communication (Salesforce Cases or Tasks)**: Represents interactions and communications with clients or teams.
+- **GitHub Pull Request (PR)**: Represents a proposed change to a repository, including the changes made and discussions around them.
+- **GitHub PR Comment**: Individual comments made on a pull request, providing feedback or suggestions.
+- **GitHub PR Review**: Formal reviews of a pull request, including approval or rejection.
+- **GitHub PR Reviewer**: Users assigned to review a pull request.
+- **Jira Issue**: Tasks, bugs, or feature requests tracked in Jira, often associated with specific code changes.
+- **Jira Issue Type**: Classification of Jira issues (e.g., Bug, Task, Story).
+- **Jira Project**: Grouping of related Jira issues within an organization.
 
 ### Entity Relationships
 
 ![Class Diagram of Code Reviewer Entities](code_reviewer_entities.png)
 
-*Alt text: Class diagram showing relationships between Account (Salesforce), Issue (Jira), Epic (Jira), and Knowledge Base Article (Confluence) entities.*
+*Alt text: Class diagram showing relationships between GitHub Pull Requests, Comments, Reviews, Reviewers, and Jira Issues.*
 
 ## Query Structure
 
 ### Basic Structure of SQL Files
 
-Each SQL file contains a query that retrieves data from Salesforce, Jira, and Confluence. The queries are written in standard SQL and are designed for flexibility, supporting dynamic filtering and pagination.
+Each SQL file contains a query that retrieves data from Jira and GitHub. The queries are written in standard SQL and are designed for flexibility, supporting dynamic filtering and pagination.
 
 - **Parameters**: Defined at the top of each file using comments in the RAW Labs format.
 - **Filters**: Applied in the `WHERE` clause based on parameters.
@@ -141,29 +132,39 @@ These queries retrieve data from single tables and support dynamic filtering and
 **Example:**
 
 ```sql
--- @param account_id Filter by account ID.
--- @type account_id integer
--- @default account_id null
+-- @param github_repository_full_name Filter by GitHub repository name.
+-- @type github_repository_full_name string
+-- @default github_repository_full_name null
 
--- Additional parameters...
+-- @param github_pull_request_number Filter by GitHub pull request number.
+-- @type github_pull_request_number integer
+-- @default github_pull_request_number null
 
--- @return A list of accounts matching the specified filters with pagination.
+-- @param page Current page number.
+-- @type page integer
+-- @default page 1
 
-WITH filtered_accounts AS (
+-- @param page_size Number of records per page.
+-- @type page_size integer
+-- @default page_size 25
+
+-- @return A list of PR comments matching the specified filters with pagination.
+
+WITH filtered_comments AS (
     SELECT
-        account_id,
-        account_name,
-        industry,
-        last_modified_date,
-        billing_city,
-        billing_country
-    FROM salesforce_account
-    WHERE (account_id = :account_id OR :account_id IS NULL)
-      -- Additional filters...
+        comment.id AS comment_id,
+        comment.pull_request_number AS pr_number,
+        comment.created_at,
+        comment.updated_at,
+        comment.body,
+        comment.author_username
+    FROM github_pull_request_comments AS comment
+    WHERE (comment.github_repository_full_name = :github_repository_full_name OR :github_repository_full_name IS NULL)
+      AND (comment.github_pull_request_number = :github_pull_request_number OR :github_pull_request_number IS NULL)
 )
 SELECT *
-FROM filtered_accounts
-ORDER BY account_id
+FROM filtered_comments
+ORDER BY created_at DESC
 LIMIT COALESCE(:page_size, 25) OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
 ```
 
@@ -174,32 +175,31 @@ These queries involve joins between multiple tables to provide more complex data
 **Example:**
 
 ```sql
--- @param epic_key Filter by Jira Epic Key.
--- @type epic_key string
--- @default epic_key null
+-- @param github_repository_full_name Filter by GitHub repository name.
+-- @type github_repository_full_name string
+-- @default github_repository_full_name null
 
--- Additional parameters...
+-- @param github_pull_request_number Filter by GitHub pull request number.
+-- @type github_pull_request_number integer
+-- @default github_pull_request_number null
 
--- @return A list of Jira issues under a specific Epic with pagination.
+-- @return A list of PR reviews with author details.
 
-WITH issues_under_epic AS (
+WITH pr_reviews AS (
     SELECT
-        j.issue_id,
-        j.key AS jira_issue_key,
-        j.summary AS jira_summary,
-        j.status AS jira_status,
-        j.assignee_display_name,
-        j.created_at,
-        j.updated_at
-    FROM jira_issue AS j
-    JOIN jira_epic AS e ON j.epic_id = e.id
-    WHERE (e.key = :epic_key OR :epic_key IS NULL)
-      -- Additional filters...
+        review.id AS review_id,
+        review.pull_request_number AS pr_number,
+        review.state,
+        review.submitted_at,
+        review.body,
+        review.author_username
+    FROM github_pull_request_reviews AS review
+    WHERE (review.github_repository_full_name = :github_repository_full_name OR :github_repository_full_name IS NULL)
+      AND (review.pull_request_number = :github_pull_request_number OR :github_pull_request_number IS NULL)
 )
 SELECT *
-FROM issues_under_epic
-ORDER BY created_at DESC
-LIMIT COALESCE(:page_size, 25) OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
+FROM pr_reviews
+ORDER BY submitted_at DESC;
 ```
 
 #### Level 3: Advanced Queries
@@ -209,49 +209,33 @@ These queries use advanced SQL techniques like window functions and subqueries t
 **Example:**
 
 ```sql
--- @param min_issue_priority Minimum issue priority.
--- @type min_issue_priority integer
--- @default min_issue_priority 3
+-- @param jira_key Jira Issue Key to filter PRs.
+-- @type jira_key string
+-- @default jira_key null
 
--- Additional parameters...
+-- @return PRs with associated Jira issues and their statuses.
 
--- @return Issues with priority above the specified level and their related knowledge base articles.
-
-WITH high_priority_issues AS (
+WITH pr_with_jira AS (
     SELECT
-        j.issue_id,
-        j.key AS jira_issue_key,
-        j.summary AS jira_summary,
-        j.priority,
-        j.status,
-        e.key AS jira_epic_key
-    FROM jira_issue AS j
-    JOIN jira_epic AS e ON j.epic_id = e.id
-    WHERE j.priority >= :min_issue_priority
-      -- Additional filters...
-),
-related_articles AS (
-    SELECT
-        cp.page_id,
-        cp.title AS article_title,
-        cp.url AS article_url,
-        cp.last_updated AS article_last_updated,
-        hi.jira_issue_key
-    FROM confluence_page AS cp
-    JOIN high_priority_issues AS hi ON LOWER(cp.title) LIKE '%' || LOWER(hi.jira_issue_key) || '%'
-    WHERE cp.space = 'Code_Review_Knowledge_Base'
+        pr.number AS pr_number,
+        pr.title AS pr_title,
+        pr.created_at AS pr_created_at,
+        pr.updated_at AS pr_updated_at,
+        pr.url AS pr_url,
+        pr_author.username AS pr_author_username,
+        jira.key AS jira_issue_key,
+        jira.summary AS jira_summary,
+        jira.status AS jira_status,
+        jira.assignee AS jira_assignee
+    FROM github_pull_requests AS pr
+    LEFT JOIN jira_issue AS jira ON LOWER(jira.key) = LOWER(pr.jira_key)
+    LEFT JOIN github_users AS pr_author ON pr.author_id = pr_author.id
+    WHERE (:jira_key IS NULL OR jira.key = :jira_key)
+      AND pr.state = 'open'
 )
-SELECT
-    hi.jira_issue_key,
-    hi.jira_summary,
-    hi.priority,
-    hi.status,
-    ra.article_title,
-    ra.article_url,
-    ra.article_last_updated
-FROM high_priority_issues AS hi
-LEFT JOIN related_articles AS ra ON hi.jira_issue_key = ra.jira_issue_key
-ORDER BY hi.priority DESC, hi.jira_issue_key;
+SELECT *
+FROM pr_with_jira
+ORDER BY pr_created_at DESC;
 ```
 
 ## Filters and Pagination
@@ -260,13 +244,12 @@ ORDER BY hi.priority DESC, hi.jira_issue_key;
 
 The template supports various types of filters for flexible querying:
 
-| Filter Type               | Description                                                         | Example                                                                                 |
-|---------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| **Equality Filters**     | Checks if a column's value equals the specified parameter or is NULL | `AND (account_id = :account_id OR :account_id IS NULL)`                                 |
-| **Substring Search**     | Searches for a substring within a column                            | `AND (jira_summary ILIKE CONCAT('%', :jira_summary, '%') OR :jira_summary IS NULL)`      |
-| **Range Filters**        | Filters data within a numeric or date range                         | `AND (created_at >= :start_date OR :start_date IS NULL)`                                |
-| **List Filters**         | Matches any value from a list                                       | `AND (category_id IN (:category_ids) OR :category_ids IS NULL)`                         |
-| **Priority Filters**     | Filters based on priority levels                                   | `AND (priority >= :min_priority OR :min_priority IS NULL)`                              |
+| Filter Type          | Description                                                  | Example                                                                                     |
+|----------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Equality Filters** | Checks if a column's value equals the specified parameter or is NULL | `AND (j.key = :jira_key OR :jira_key IS NULL)`                                             |
+| **Substring Search** | Searches for a substring within a column                     | `AND (j.summary ILIKE CONCAT('%', :jira_summary, '%') OR :jira_summary IS NULL)`            |
+| **Range Filters**    | Filters data within a numeric or date range                  | `AND (pr.created_at >= :start_date OR :start_date IS NULL)`                                 |
+| **List Filters**     | Matches any value from a list                                | `AND (pr.author_username IN (:reviewer_usernames) OR :reviewer_usernames IS NULL)`           |
 
 ### Pagination
 
@@ -285,11 +268,11 @@ OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
 
 ## Customization
 
-This Code Reviewer API template is designed to be adaptable to various datasets and schemas:
+This Code Reviewer API template is designed to be adaptable to various development workflows and repository structures:
 
-- **Modify SQL Queries**: Adjust the provided SQL queries to include additional fields or entities specific to your Salesforce, Jira, and Confluence databases.
+- **Modify SQL Queries**: Adjust the provided SQL queries to include additional fields or entities specific to your Jira and GitHub setups.
 - **Add New Endpoints**: Create new SQL and YAML files to define additional API endpoints as needed.
-- **Adjust Parameters**: Modify or add parameters in the queries to support custom filters and requirements.
+- **Adjust Parameters**: Modify or add parameters in the queries to support custom filters and data retrieval requirements.
 
 ## Contributing
 
@@ -315,9 +298,8 @@ We welcome contributions!
 - **Documentation**:
   - Refer to the [RAW Labs Documentation](https://docs.raw-labs.com/docs/) for detailed guides.
     - [Using Data Sources](https://docs.raw-labs.com/docs/sql/data-sources/overview)
-    - [Salesforce Data Source](https://docs.raw-labs.com/sql/data-sources/salesforce)
     - [Jira Data Source](https://docs.raw-labs.com/sql/data-sources/jira)
-    - [Confluence Data Source](https://docs.raw-labs.com/sql/data-sources/confluence)
+    - [GitHub Data Source](https://docs.raw-labs.com/sql/data-sources/github)
     - [Publishing APIs](https://docs.raw-labs.com/docs/publishing-api/overview)
 
 - **Community Forum**:
@@ -333,7 +315,7 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Acknowledgements
 
 - **Contributors**: Thanks to all our contributors for their efforts.
-- **Third-Party Tools**: This template utilizes Salesforce, Jira, and Confluence, demonstrating integration with RAW Labs.
+- **Third-Party Tools**: This template utilizes Jira and GitHub and demonstrates integration with RAW Labs.
 
 ## Contact
 
@@ -347,8 +329,7 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Additional Resources
 
 - **RAW Labs Documentation**: Comprehensive guides and references are available at [docs.raw-labs.com](https://docs.raw-labs.com/).
-- **Salesforce Data Source**: Detailed instructions on connecting Salesforce with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/salesforce).
 - **Jira Data Source**: Detailed instructions on connecting Jira with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/jira).
-- **Confluence Data Source**: Detailed instructions on connecting Confluence with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/confluence).
+- **GitHub Data Source**: Detailed instructions on connecting GitHub with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/github).
 - **Publishing APIs**: Learn how to publish your SQL queries as APIs [here](https://docs.raw-labs.com/docs/publishing-api/overview).
-- **Steampipe Schemas**: Explore Steampipe's schemas for Salesforce, Jira, and Confluence [here](https://www.steampipe.io/docs/reference/schemas).
+- **SQL Language**: Explore RAW Labs' SQL language for data manipulation [here](https://docs.raw-labs.com/sql/overview).

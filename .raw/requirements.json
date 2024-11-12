@@ -1,0 +1,13 @@
+{
+    "template": "Code Reviewer",
+    "credentials": [
+        {
+            "type": "JIRA",
+            "name": "jira"
+        },
+        {
+            "type": "GITHUB",
+            "name": "github"
+        }
+    ]
+}
