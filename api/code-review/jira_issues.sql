@@ -24,7 +24,7 @@
 -- @param page_size Number of records per page.
 -- @type page_size integer
 -- @default page_size 25
--- @return Retrieves Jira issues that may or may not have an associated open pull request.
+-- @return Retrieves Jira issues
 WITH prs AS (
   SELECT
     github_pull_request.number,

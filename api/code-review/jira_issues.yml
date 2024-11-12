@@ -1,8 +1,8 @@
 raw: "0.10"
 endpoint: GET
 metadata:
-  title: Retrieve Jira issues with or without GitHub PRs.
-  description: Retrieves Jira issues without an associated open GitHub Pull Request. Can filter by various parameters. Supports pagination.
+  title: Retrieve Jira issues.
+  description: Retrieves Jira issues. Can filter by various parameters. Supports pagination.
   tags:
     - code_reviewer
     - issue
