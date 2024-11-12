@@ -4,7 +4,7 @@ metadata:
   title: Get GitHub PR Reviews.
   description: Gets the reviews for a specific GitHub pull request in a given repository.
   tags:
-    - code_review
+    - code_reviewer
     - issue
     - github_pull_request
     - review

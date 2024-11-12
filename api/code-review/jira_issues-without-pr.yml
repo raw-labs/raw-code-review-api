@@ -4,7 +4,7 @@ metadata:
   title: Retrieve Jira issues without PR.
   description: Retrieves Jira issues without an associated open pull request, based on specified parameters.
   tags:
-    - code_review
+    - code_reviewer
     - issue
     - no_pull_requests
     - github

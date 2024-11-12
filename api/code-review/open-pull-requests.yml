@@ -4,7 +4,7 @@ metadata:
   title: Open PRs with Jira info.
   description: Retrieves open GitHub pull requests with related Jira issues, filtered by username, Jira key, and created within the last month.
   tags:
-    - code_review
+    - code_reviewer
     - open_pull_requests
     - github
     - jira

@@ -4,7 +4,7 @@ metadata:
   title: Get GitHub PR Reviewers.
   description: Returns information about the reviewers of a specific GitHub pull request, including their GitHub user URL, avatar URL, association, ability to push to the repository, and username.
   tags:
-    - code_review
+    - code_reviewer
     - issue
     - github_pull_request
     - reviewer

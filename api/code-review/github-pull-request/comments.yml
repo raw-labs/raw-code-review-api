@@ -4,7 +4,7 @@ metadata:
   title: Get PR Comments.
   description: Returns the comments for a specific GitHub pull request in a repository.
   tags:
-    - code_review
+    - code_reviewer
     - issue
     - github_pull_request
     - comment
