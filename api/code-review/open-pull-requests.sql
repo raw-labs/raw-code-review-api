@@ -6,7 +6,6 @@
 -- @default jira_key null
 -- @param github_repository_full_name GitHub repository name
 -- @type github_repository_full_name varchar
--- @default github_repository_full_name null
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
 -- @default github_pull_request_number null

@@ -12,7 +12,6 @@
 -- @default jira_project_key null
 -- @param github_repository_full_name GitHub repository name
 -- @type github_repository_full_name varchar
--- @default github_repository_full_name null
 -- @return Retrieves Jira issues that do not have an associated open pull request. Useful for identifying issues that may need code development or have been overlooked.
 WITH prs AS (
   SELECT
