@@ -4,7 +4,7 @@
 -- @param jira_key (Optional) Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
--- @param jira_issue_creation_date (Optional) Creation date of Jira issue
+-- @param jira_issue_creation_date (Optional) Creation date of Jira issue. Format YYYY-MM-DD.
 -- @type jira_issue_creation_date date
 -- @default jira_issue_creation_date null
 -- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
