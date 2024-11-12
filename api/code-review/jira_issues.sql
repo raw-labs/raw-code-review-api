@@ -53,13 +53,30 @@ jira_no_pr AS (
   LEFT JOIN
     prs ON jira_issue."key" = prs.issue_keys[1]
   WHERE 
-    ((:is_jira_issue_open AND upper(jira_issue.status_category) NOT IN ('DONE', 'CLOSED', 'RESOLVED')) OR (upper(jira_issue.status_category) IN ('DONE', 'CLOSED', 'RESOLVED')))
-    AND ((:is_without_pull_request AND prs.issue_keys IS NULL) OR (not(:is_without_pull_request) AND prs.issue_keys IS NOT NULL))
-    AND (jira_issue.project_key = :jira_project_key OR :jira_project_key IS NULL)
-    AND ((:jira_issue_creation_date IS NOT NULL AND jira_issue.created>=GREATEST(current_date - interval '15' day, :jira_issue_creation_date::timestamp)) OR (:jira_issue_creation_date IS NULL AND jira_issue.created>= current_date - interval '1' month))
-    AND (jira_issue.assignee_display_name ilike concat('%', :username, '%') OR :username IS NULL)
-    AND (jira_issue."key" ilike :jira_key OR :jira_key IS NULL)
-
+    (
+        (:is_jira_issue_open AND upper(jira_issue.status_category) NOT IN ('DONE', 'CLOSED', 'RESOLVED')) 
+        OR 
+        (upper(jira_issue.status_category) IN ('DONE', 'CLOSED', 'RESOLVED'))
+    )
+    AND (
+        (:is_without_pull_request AND prs.issue_keys IS NULL) 
+        OR 
+        (not(:is_without_pull_request) AND prs.issue_keys IS NOT NULL)
+    )
+    AND (
+        (:jira_issue_creation_date IS NOT NULL AND jira_issue.created>=GREATEST(current_date - interval '15' day, :jira_issue_creation_date::timestamp)) 
+        OR 
+        (:jira_issue_creation_date IS NULL AND jira_issue.created>= current_date - interval '1' month)
+    )
+    AND (
+        jira_issue.project_key = :jira_project_key OR :jira_project_key IS NULL
+    )
+    AND (
+        jira_issue.assignee_display_name ilike concat('%', :username, '%') OR :username IS NULL
+    )
+    AND (
+        jira_issue."key" ilike :jira_key OR :jira_key IS NULL
+    )
 )
 SELECT *
 FROM jira_no_pr
