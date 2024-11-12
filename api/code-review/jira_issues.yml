@@ -10,7 +10,7 @@ metadata:
     - github
     - jira
 code: sql
-codeFile: jira_issues-without-pr.sql
+codeFile: jira_issues.sql
 format: json
 security:
   public: false
