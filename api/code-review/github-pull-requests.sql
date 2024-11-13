@@ -57,7 +57,7 @@ jira_pr AS (
     prs.state AS pr_state,
     prs.url AS pr_url,
     prs.author_github_username AS pr_author,
-    prs.issue_keys[1] AS jira_issue_key,
+    jira_issue."key" AS jira_issue_key,
     jira_issue.summary AS jira_summary,
     jira_issue.status AS jira_status,
     jira_issue.assignee_display_name AS jira_assignee
