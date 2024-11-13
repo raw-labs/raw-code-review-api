@@ -1,6 +1,4 @@
----
-
-# 🛠️ **Code Reviewer API**
+# 🛠️ Code Reviewer API
 
 ## Table of Contents
 
@@ -14,18 +12,21 @@
 3. [Domain Entities](#domain-entities)
    - [Entities Overview](#entities-overview)
    - [Entity Relationships](#entity-relationships)
-4. [Query Structure](#query-structure)
+4. [API Endpoints](#api-endpoints)
+   - [Endpoint Overview](#endpoint-overview)
+   - [Endpoint Details](#endpoint-details)
+5. [Query Structure](#query-structure)
    - [Basic Structure of SQL Files](#basic-structure-of-sql-files)
    - [Types of Queries](#types-of-queries)
-5. [Filters and Pagination](#filters-and-pagination)
+6. [Filters and Pagination](#filters-and-pagination)
    - [Filters](#filters)
    - [Pagination](#pagination)
-6. [Customization](#customization)
-7. [Contributing](#contributing)
-8. [Support and Troubleshooting](#support-and-troubleshooting)
-9. [License](#license)
-10. [Acknowledgements](#acknowledgements)
-11. [Contact](#contact)
+7. [Customization](#customization)
+8. [Contributing](#contributing)
+9. [Support and Troubleshooting](#support-and-troubleshooting)
+10. [License](#license)
+11. [Acknowledgements](#acknowledgements)
+12. [Contact](#contact)
 
 ---
 
@@ -33,233 +34,328 @@
 
 ### Description
 
-This repository provides a **Code Reviewer API template** for integrating data from **GitHub** and **Jira** into the RAW Labs platform. It demonstrates how to retrieve and manipulate code review data using SQL queries on GitHub repositories and Jira issues within RAW Labs. This API serves as a showcase of RAW Labs' capability to seamlessly integrate multiple data sources, highlighting its flexibility and adaptability for enhancing code review processes.
+The **Code Reviewer API** provides a unified interface for integrating data from **GitHub** and **Jira** to enhance code review processes. It allows users to retrieve and analyze information related to pull requests, code reviews, comments, reviewers, and associated Jira issues. This API demonstrates how to seamlessly integrate multiple data sources using SQL queries within the RAW Labs platform, streamlining workflows and improving collaboration.
 
 ### How It Works
 
-The RAW Labs platform enables the creation of APIs by writing SQL queries that can access data from various data sources, including GitHub and Jira. Utilizing Steampipe's schemas for these platforms, RAW Labs facilitates real-time data retrieval without the need for data replication. This API template illustrates how RAW Labs interacts with GitHub for pull request management and Jira for issue tracking, providing a unified view of code reviews and related tasks.
+The RAW Labs platform enables the creation of APIs by writing SQL queries that can access data from various sources, including GitHub and Jira. By leveraging these capabilities, the Code Reviewer API allows for real-time data retrieval and analysis without the need for data replication. The API facilitates interactions with GitHub pull requests and Jira issues, providing a consolidated view of the code review lifecycle.
 
 ### Features
 
-- **Real-Time Data Access**: Query Jira issues and GitHub pull requests in real-time without data replication.
-- **Template Queries**: Utilize predefined queries for common code review operations.
-- **Data Integration**: Combine data from Jira and GitHub to gain comprehensive insights into code review processes.
-- **Enhanced Reporting**: Generate detailed reports on pull request comments, reviews, and associated Jira issues.
-- **Demonstration of Flexibility**: Showcases RAW Labs' ability to proxy multiple data sources, emphasizing adaptability to various workflows and data schemas.
+- **Integrated Data Access**: Combine data from GitHub and Jira to gain comprehensive insights into code review processes.
+- **Real-Time Information**: Query up-to-date information directly from GitHub and Jira.
+- **Flexible Querying**: Utilize dynamic filtering and pagination to tailor data retrieval to specific needs.
+- **Enhanced Reporting**: Generate detailed reports on pull requests, reviews, comments, reviewers, and associated Jira issues.
+- **Scalability and Customization**: Adapt the API to various workflows and organizational structures.
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Jira Account**:
-  - Access to a Jira workspace with relevant repositories and issues.
-  - Necessary permissions to read data from Jira projects and issues.
-- **GitHub Account**:
-  - Access to GitHub repositories with pull requests.
-  - Necessary permissions to read data from GitHub repositories.
 - **RAW Labs Account**:
   - An active RAW Labs account. [Sign up here](https://app.raw-labs.com/register) if you don't have one.
+- **GitHub Access**:
+  - Access to GitHub repositories with pull requests.
+  - Personal access tokens with appropriate scopes (e.g., `repo`, `read:org`).
+- **Jira Access**:
+  - Access to a Jira workspace with relevant projects and issues.
+  - Necessary permissions to read data from Jira projects and issues.
 - **Permissions**:
-  - **Jira**:
-    - API access enabled.
   - **GitHub**:
-    - Personal access tokens with appropriate scopes (e.g., `repo`, `read:org`).
-  - **RAW Labs**:
-    - Admin role to your RAW Labs account.
+    - Personal access token with required scopes.
+  - **Jira**:
+    - API access enabled and credentials with read permissions.
 - **Dependencies**:
-  - Web browser to access RAW Labs, Jira, and GitHub.
+  - Web browser to access RAW Labs, GitHub, and Jira.
   - Internet connectivity.
 
 ### Setup Instructions
 
-1. **Configure Jira and GitHub Connections in RAW Labs**:
-   - Follow the instructions in the [RAW Labs Jira Data Source documentation](https://docs.raw-labs.com/sql/data-sources/jira) and [RAW Labs GitHub Data Source documentation](https://docs.raw-labs.com/sql/data-sources/github) to set up your Jira and GitHub connections.
+1. **Configure GitHub and Jira Connections in RAW Labs**:
+   - Follow the instructions in the [RAW Labs GitHub Data Source documentation](https://docs.raw-labs.com/sql/data-sources/github) and [RAW Labs Jira Data Source documentation](https://docs.raw-labs.com/sql/data-sources/jira) to set up your connections.
+   - Ensure that the necessary credentials and tokens are securely stored in RAW Labs.
 
 2. **Clone the Repository**:
    - Clone this repository into your RAW Labs workspace.
+   - Use the RAW Labs platform to import the SQL queries and endpoint configurations.
 
 3. **Review SQL and YAML Files**:
-   - Examine the provided `.sql` and `.yml` files.
-   - Each SQL file contains a query, and each YAML file configures the corresponding API endpoint.
+   - Examine the provided `.sql` files, which contain the SQL queries for each endpoint.
+   - Each `.sql` file is accompanied by a `.yml` file that defines the API endpoint configuration.
 
 4. **Customize the Queries**:
-   - Adjust the SQL queries to fit your Jira and GitHub datasets if necessary.
-   - Modify filters, parameters, or entities according to your data schema.
+   - Adjust the SQL queries to fit your GitHub and Jira datasets if necessary.
+   - Modify filters, parameters, or entities according to your data schema and organizational needs.
 
 5. **Deploy APIs in RAW Labs**:
    - Use RAW Labs to publish the SQL queries as APIs.
-   - Refer to the [Publishing APIs documentation](https://docs.raw-labs.com/docs/publishing-api/overview) for guidance.
+   - Refer to the [Publishing APIs documentation](https://docs.raw-labs.com/docs/publishing-api/overview) for guidance on deploying your APIs.
 
 6. **Test Your APIs**:
-   - Use RAW Labs' testing tools or tools like Postman to test your APIs.
+   - Use RAW Labs' testing tools or external tools like Postman to test your APIs.
+   - Verify that the endpoints return the expected data and handle parameters correctly.
 
 ## Domain Entities
 
 ### Entities Overview
 
-The template focuses on key code review entities typically found in software development workflows:
+The Code Reviewer API focuses on key entities involved in code review processes:
 
-- **GitHub Pull Request (PR)**: Represents a proposed change to a repository, including the changes made and discussions around them.
-- **GitHub PR Comment**: Individual comments made on a pull request, providing feedback or suggestions.
-- **GitHub PR Review**: Formal reviews of a pull request, including approval or rejection.
-- **GitHub PR Reviewer**: Users assigned to review a pull request.
+- **Pull Request (PR)**: A proposed change to a repository, including code changes, discussions, and reviews.
+- **PR Comment**: Feedback or discussion points made on a pull request.
+- **PR Review**: Formal reviews of a pull request, which may include approvals, change requests, or comments.
+- **Reviewer**: Users assigned to review a pull request.
 - **Jira Issue**: Tasks, bugs, or feature requests tracked in Jira, often associated with specific code changes.
-- **Jira Issue Type**: Classification of Jira issues (e.g., Bug, Task, Story).
-- **Jira Project**: Grouping of related Jira issues within an organization.
+- **Assignee**: The person responsible for a Jira issue.
 
 ### Entity Relationships
 
-![Class Diagram of Code Reviewer Entities](code_reviewer_entities.png)
+The entities are interconnected to provide a comprehensive view of the code review process:
 
-*Alt text: Class diagram showing relationships between GitHub Pull Requests, Comments, Reviews, Reviewers, and Jira Issues.*
+- A **Pull Request** may be linked to one or more **Jira Issues** via references in the PR title or description.
+- **PR Comments** and **PR Reviews** are associated with specific **Pull Requests**.
+- **Reviewers** are assigned to **Pull Requests** to perform code reviews.
+- **Jira Issues** may be associated with multiple **Pull Requests** if multiple code changes are related to the same issue.
+
+![Entity Relationship Diagram](entity_relationship_diagram.png)
+
+*Note: The diagram illustrates the relationships between pull requests, comments, reviews, reviewers, and Jira issues.*
+
+## API Endpoints
+
+### Endpoint Overview
+
+The Code Reviewer API provides several endpoints to interact with integrated data from GitHub and Jira. The key endpoints include:
+
+1. **Retrieve Pull Requests with Jira Information**:
+   - **Endpoint**: `/api/code-review/github-pull-requests`
+   - **Description**: Retrieves GitHub pull requests with associated Jira issue details, supporting various filters and pagination.
+
+2. **Retrieve Jira Issues**:
+   - **Endpoint**: `/api/code-review/jira_issues`
+   - **Description**: Retrieves Jira issues, with options to filter by assignment, status, and whether they have associated pull requests.
+
+3. **Retrieve Pull Request Reviewers**:
+   - **Endpoint**: `/api/code-review/github-pull-request/reviewers`
+   - **Description**: Retrieves information about reviewers assigned to a specific pull request.
+
+4. **Retrieve Pull Request Reviews**:
+   - **Endpoint**: `/api/code-review/github-pull-request/reviews`
+   - **Description**: Retrieves reviews for a specific pull request, including review states and comments.
+
+5. **Retrieve Pull Request Comments**:
+   - **Endpoint**: `/api/code-review/github-pull-request/comments`
+   - **Description**: Retrieves comments made on a specific pull request.
+
+### Endpoint Details
+
+#### 1. Retrieve Pull Requests with Jira Information
+
+- **Endpoint**: `/api/code-review/github-pull-requests`
+- **Method**: `GET`
+- **Description**: Retrieves pull requests from a specified GitHub repository, including associated Jira issue information.
+- **Parameters**:
+  - `github_repository_full_name` (string, required): Full name of the GitHub repository (e.g., `owner/repo`).
+  - `github_pull_request_number` (integer, optional): Specific pull request number to retrieve.
+  - `username` (string, optional): Filter by Jira assignee username.
+  - `jira_key` (string, optional): Filter by specific Jira issue key.
+  - `pr_creation_date_from` (date, optional): Start date for pull request creation date filter.
+  - `pr_creation_date_to` (date, optional): End date for pull request creation date filter.
+  - `is_github_pull_request_open` (boolean, optional): Filter by pull request open/closed status.
+  - `page` (integer, optional): Page number for pagination (default: 1).
+  - `page_size` (integer, optional): Number of records per page (default: 25).
+- **Response**: Returns a list of pull requests with their details and associated Jira issue information.
+
+#### 2. Retrieve Jira Issues
+
+- **Endpoint**: `/api/code-review/jira_issues`
+- **Method**: `GET`
+- **Description**: Retrieves Jira issues, optionally filtering by assignment, creation date, project key, and whether they have associated pull requests.
+- **Parameters**:
+  - `username` (string, optional): Filter by Jira assignee username.
+  - `jira_key` (string, optional): Filter by specific Jira issue key.
+  - `jira_issue_creation_date_from` (date, optional): Start date for Jira issue creation date filter.
+  - `jira_issue_creation_date_to` (date, optional): End date for Jira issue creation date filter.
+  - `jira_project_key` (string, optional): Filter by Jira project key.
+  - `is_without_pull_request` (boolean, optional): Filter issues without associated pull requests.
+  - `is_jira_issue_open` (boolean, optional): Filter by Jira issue open/closed status.
+  - `page` (integer, optional): Page number for pagination (default: 1).
+  - `page_size` (integer, optional): Number of records per page (default: 25).
+- **Response**: Returns a list of Jira issues with their details.
+
+#### 3. Retrieve Pull Request Reviewers
+
+- **Endpoint**: `/api/code-review/github-pull-request/reviewers`
+- **Method**: `GET`
+- **Description**: Retrieves reviewers assigned to a specific pull request.
+- **Parameters**:
+  - `github_repository_full_name` (string, required): Full name of the GitHub repository.
+  - `github_pull_request_number` (integer, required): Pull request number.
+- **Response**: Returns a list of reviewers with their GitHub usernames, URLs, and roles.
+
+#### 4. Retrieve Pull Request Reviews
+
+- **Endpoint**: `/api/code-review/github-pull-request/reviews`
+- **Method**: `GET`
+- **Description**: Retrieves reviews for a specific pull request, including the review state and any comments.
+- **Parameters**:
+  - `github_repository_full_name` (string, required): Full name of the GitHub repository.
+  - `github_pull_request_number` (integer, required): Pull request number.
+- **Response**: Returns a list of reviews with details such as reviewer username, state, and comments.
+
+#### 5. Retrieve Pull Request Comments
+
+- **Endpoint**: `/api/code-review/github-pull-request/comments`
+- **Method**: `GET`
+- **Description**: Retrieves comments made on a specific pull request.
+- **Parameters**:
+  - `github_repository_full_name` (string, required): Full name of the GitHub repository.
+  - `github_pull_request_number` (integer, required): Pull request number.
+- **Response**: Returns a list of comments with details such as author username, body, and timestamps.
 
 ## Query Structure
 
 ### Basic Structure of SQL Files
 
-Each SQL file contains a query that retrieves data from Jira and GitHub. The queries are written in standard SQL and are designed for flexibility, supporting dynamic filtering and pagination.
+Each SQL file corresponds to an API endpoint and contains the SQL query that retrieves the required data. The queries are parameterized to allow dynamic filtering based on user input.
 
-- **Parameters**: Defined at the top of each file using comments in the RAW Labs format.
-- **Filters**: Applied in the `WHERE` clause based on parameters.
-- **Pagination**: Implemented using `LIMIT` and `OFFSET`.
+- **Parameters**: Defined at the top of each file using comments in the RAW Labs format (e.g., `-- @param`, `-- @type`, `-- @default`).
+- **CTEs (Common Table Expressions)**: Used to structure the query and handle intermediate results.
+- **Joins**: Utilized to combine data from GitHub and Jira sources.
+- **Filters**: Applied in the `WHERE` clause based on the parameters provided.
+- **Pagination**: Implemented using `LIMIT` and `OFFSET` clauses.
 
 ### Types of Queries
 
-#### Level 1: Basic Queries
+#### Integrated Queries
 
-These queries retrieve data from single tables and support dynamic filtering and pagination.
+These queries retrieve and combine data from both GitHub and Jira to provide a unified view.
 
-**Example:**
+**Example**:
 
 ```sql
--- @param github_repository_full_name Filter by GitHub repository name.
--- @type github_repository_full_name string
--- @default github_repository_full_name null
-
--- @param github_pull_request_number Filter by GitHub pull request number.
+-- @param github_repository_full_name GitHub repository name
+-- @type github_repository_full_name varchar
+-- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
 -- @default github_pull_request_number null
-
--- @param page Current page number.
+-- @param username Jira assignee username
+-- @type username varchar
+-- @default username null
+-- @param jira_key Jira Issue Key
+-- @type jira_key varchar
+-- @default jira_key null
+-- @param pr_creation_date_from Start date for PR creation date filter
+-- @type pr_creation_date_from date
+-- @default pr_creation_date_from current_date - interval '15' day
+-- @param pr_creation_date_to End date for PR creation date filter
+-- @type pr_creation_date_to date
+-- @default pr_creation_date_to current_date
+-- @param is_github_pull_request_open Filter by PR open/closed status
+-- @type is_github_pull_request_open boolean
+-- @default is_github_pull_request_open null
+-- @param page Current page number
 -- @type page integer
 -- @default page 1
-
--- @param page_size Number of records per page.
+-- @param page_size Number of records per page
 -- @type page_size integer
 -- @default page_size 25
+-- @return GitHub Pull Requests with Jira Information
 
--- @return A list of PR comments matching the specified filters with pagination.
-
-WITH filtered_comments AS (
-    SELECT
-        comment.id AS comment_id,
-        comment.pull_request_number AS pr_number,
-        comment.created_at,
-        comment.updated_at,
-        comment.body,
-        comment.author_username
-    FROM github_pull_request_comments AS comment
-    WHERE (comment.github_repository_full_name = :github_repository_full_name OR :github_repository_full_name IS NULL)
-      AND (comment.github_pull_request_number = :github_pull_request_number OR :github_pull_request_number IS NULL)
+WITH prs AS (
+  SELECT
+    pr.number AS pr_number,
+    pr.title AS pr_title,
+    pr.created_at AS pr_created_at,
+    pr.updated_at AS pr_updated_at,
+    pr.url AS pr_url,
+    pr.state AS pr_state,
+    pr.author ->> 'login' AS pr_author,
+    REGEXP_MATCHES(pr.title, '([A-Z]+-[0-9]+)', 'g') AS jira_keys
+  FROM
+    github.github_pull_request AS pr
+  WHERE
+    pr.repository_full_name = :github_repository_full_name
+    AND (:github_pull_request_number IS NULL OR pr.number = :github_pull_request_number)
+    AND (
+      :is_github_pull_request_open IS NULL OR
+      (:is_github_pull_request_open = TRUE AND pr.state = 'open') OR
+      (:is_github_pull_request_open = FALSE AND pr.state != 'open')
+    )
+    AND pr.created_at BETWEEN :pr_creation_date_from AND :pr_creation_date_to
+),
+jira_pr AS (
+  SELECT
+    prs.*,
+    ji.key AS jira_issue_key,
+    ji.summary AS jira_summary,
+    ji.status AS jira_status,
+    ji.assignee_display_name AS jira_assignee
+  FROM
+    prs
+  LEFT JOIN
+    jira.jira_issue AS ji ON ji.key = prs.jira_keys[1]
+  WHERE
+    (:username IS NULL OR ji.assignee_display_name ILIKE '%' || :username || '%')
+    AND (:jira_key IS NULL OR ji.key ILIKE :jira_key)
 )
 SELECT *
-FROM filtered_comments
-ORDER BY created_at DESC
-LIMIT COALESCE(:page_size, 25) OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
+FROM jira_pr
+ORDER BY pr_number DESC
+LIMIT COALESCE(:page_size, 25)
+OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
 ```
 
-#### Level 2: Intermediate Queries
+#### Specific Entity Queries
 
-These queries involve joins between multiple tables to provide more complex data retrieval.
+These queries focus on a specific entity, such as retrieving comments or reviews for a pull request.
 
-**Example:**
+**Example**:
 
 ```sql
--- @param github_repository_full_name Filter by GitHub repository name.
--- @type github_repository_full_name string
--- @default github_repository_full_name null
-
--- @param github_pull_request_number Filter by GitHub pull request number.
+-- @param github_repository_full_name GitHub repository name
+-- @type github_repository_full_name varchar
+-- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
--- @default github_pull_request_number null
+-- @return Get Pull Request Comments
 
--- @return A list of PR reviews with author details.
-
-WITH pr_reviews AS (
-    SELECT
-        review.id AS review_id,
-        review.pull_request_number AS pr_number,
-        review.state,
-        review.submitted_at,
-        review.body,
-        review.author_username
-    FROM github_pull_request_reviews AS review
-    WHERE (review.github_repository_full_name = :github_repository_full_name OR :github_repository_full_name IS NULL)
-      AND (review.pull_request_number = :github_pull_request_number OR :github_pull_request_number IS NULL)
-)
-SELECT *
-FROM pr_reviews
-ORDER BY submitted_at DESC;
-```
-
-#### Level 3: Advanced Queries
-
-These queries use advanced SQL techniques like window functions and subqueries to provide analytical insights.
-
-**Example:**
-
-```sql
--- @param jira_key Jira Issue Key to filter PRs.
--- @type jira_key string
--- @default jira_key null
-
--- @return PRs with associated Jira issues and their statuses.
-
-WITH pr_with_jira AS (
-    SELECT
-        pr.number AS pr_number,
-        pr.title AS pr_title,
-        pr.created_at AS pr_created_at,
-        pr.updated_at AS pr_updated_at,
-        pr.url AS pr_url,
-        pr_author.username AS pr_author_username,
-        jira.key AS jira_issue_key,
-        jira.summary AS jira_summary,
-        jira.status AS jira_status,
-        jira.assignee AS jira_assignee
-    FROM github_pull_requests AS pr
-    LEFT JOIN jira_issue AS jira ON LOWER(jira.key) = LOWER(pr.jira_key)
-    LEFT JOIN github_users AS pr_author ON pr.author_id = pr_author.id
-    WHERE (:jira_key IS NULL OR jira.key = :jira_key)
-      AND pr.state = 'open'
-)
-SELECT *
-FROM pr_with_jira
-ORDER BY pr_created_at DESC;
+SELECT 
+  c.id,
+  c.number,
+  c.published_at,
+  c.created_at,
+  c.body,
+  c.author ->> 'login' AS author_username,
+  c.can_delete
+FROM
+  github.github_pull_request_comment AS c
+WHERE
+  c.repository_full_name = :github_repository_full_name
+  AND c.number = :github_pull_request_number;
 ```
 
 ## Filters and Pagination
 
 ### Filters
 
-The template supports various types of filters for flexible querying:
+The API supports various filters to refine the data retrieved:
 
-| Filter Type          | Description                                                  | Example                                                                                     |
-|----------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| **Equality Filters** | Checks if a column's value equals the specified parameter or is NULL | `AND (j.key = :jira_key OR :jira_key IS NULL)`                                             |
-| **Substring Search** | Searches for a substring within a column                     | `AND (j.summary ILIKE CONCAT('%', :jira_summary, '%') OR :jira_summary IS NULL)`            |
-| **Range Filters**    | Filters data within a numeric or date range                  | `AND (pr.created_at >= :start_date OR :start_date IS NULL)`                                 |
-| **List Filters**     | Matches any value from a list                                | `AND (pr.author_username IN (:reviewer_usernames) OR :reviewer_usernames IS NULL)`           |
+- **String Matching**: Filters based on matching strings, such as repository names, usernames, or issue keys.
+- **Date Ranges**: Filters data within specified date ranges. Date parameters must not exceed a range of 15 days. If a date range exceeds this limit, the API will return an error message prompting the user to adjust the dates.
+- **Boolean Flags**: Filters based on boolean parameters, such as `is_github_pull_request_open` or `is_without_pull_request`.
+- **Numeric Ranges**: Filters based on numeric values, such as pull request numbers.
 
 ### Pagination
 
-The queries support pagination through `LIMIT` and `OFFSET`.
+Pagination is implemented to manage large datasets and improve performance.
 
 - **Parameters**:
-  - `:page` (integer): The current page number (default is 1).
-  - `:page_size` (integer): The number of records per page (default is 25).
-
-**Example:**
+  - `page` (integer): The current page number (default is 1).
+  - `page_size` (integer): The number of records per page (default is 25).
+- **Usage**:
+  - The `LIMIT` clause is set to the `page_size`.
+  - The `OFFSET` is calculated as `(page - 1) * page_size`.
+- **Example**:
 
 ```sql
 LIMIT COALESCE(:page_size, 25)
@@ -268,15 +364,16 @@ OFFSET (COALESCE(:page, 1) - 1) * COALESCE(:page_size, 25);
 
 ## Customization
 
-This Code Reviewer API template is designed to be adaptable to various development workflows and repository structures:
+The Code Reviewer API template is designed to be adaptable to various development workflows and repository structures:
 
-- **Modify SQL Queries**: Adjust the provided SQL queries to include additional fields or entities specific to your Jira and GitHub setups.
+- **Modify SQL Queries**: Adjust the provided SQL queries to include additional fields or entities specific to your GitHub and Jira setups.
 - **Add New Endpoints**: Create new SQL and YAML files to define additional API endpoints as needed.
 - **Adjust Parameters**: Modify or add parameters in the queries to support custom filters and data retrieval requirements.
+- **Enhance Functionality**: Integrate additional data sources or services to extend the capabilities of the API.
 
 ## Contributing
 
-We welcome contributions!
+We welcome contributions to enhance the Code Reviewer API!
 
 - **Reporting Issues**:
   - Submit issues via [GitHub Issues](https://github.com/raw-labs/code-reviewer-api/issues).
@@ -298,8 +395,8 @@ We welcome contributions!
 - **Documentation**:
   - Refer to the [RAW Labs Documentation](https://docs.raw-labs.com/docs/) for detailed guides.
     - [Using Data Sources](https://docs.raw-labs.com/docs/sql/data-sources/overview)
-    - [Jira Data Source](https://docs.raw-labs.com/sql/data-sources/jira)
     - [GitHub Data Source](https://docs.raw-labs.com/sql/data-sources/github)
+    - [Jira Data Source](https://docs.raw-labs.com/sql/data-sources/jira)
     - [Publishing APIs](https://docs.raw-labs.com/docs/publishing-api/overview)
 
 - **Community Forum**:
@@ -315,7 +412,7 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Acknowledgements
 
 - **Contributors**: Thanks to all our contributors for their efforts.
-- **Third-Party Tools**: This template utilizes Jira and GitHub and demonstrates integration with RAW Labs.
+- **Third-Party Tools**: This template utilizes GitHub and Jira data sources and demonstrates integration with RAW Labs.
 
 ## Contact
 
@@ -329,7 +426,8 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Additional Resources
 
 - **RAW Labs Documentation**: Comprehensive guides and references are available at [docs.raw-labs.com](https://docs.raw-labs.com/).
-- **Jira Data Source**: Detailed instructions on connecting Jira with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/jira).
 - **GitHub Data Source**: Detailed instructions on connecting GitHub with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/github).
+- **Jira Data Source**: Detailed instructions on connecting Jira with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/jira).
 - **Publishing APIs**: Learn how to publish your SQL queries as APIs [here](https://docs.raw-labs.com/docs/publishing-api/overview).
 - **SQL Language**: Explore RAW Labs' SQL language for data manipulation [here](https://docs.raw-labs.com/sql/overview).
+
