@@ -1,0 +1,1 @@
+ Json.InferAndRead(Http.Get("https://timeapi.io/api/timezone/zone?timeZone=Europe%2FZurich")).currentLocalTime

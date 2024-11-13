@@ -65,7 +65,7 @@ jira_pr AS (
   FROM
     prs
   LEFT JOIN
-    -- jira.jira_issue ON jira_issue."key" = prs.issue_keys[1]
+-- jira.jira_issue ON jira_issue."key" = prs.issue_keys[1]
     prs ON prs.title ilike concat('%', jira_issue."key", '%') 
   WHERE
   (jira_issue.created>= (:pr_creation_date - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
