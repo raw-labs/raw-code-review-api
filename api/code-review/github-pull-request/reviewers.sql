@@ -2,7 +2,6 @@
 -- @type github_repository_full_name varchar
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
--- @default github_pull_request_number null
 -- @return Get GitHub Pull Request Reviewers
 SELECT 
   github_pull_request_review.author -> 'url' as reviewer_github_user_url, 

@@ -9,7 +9,7 @@
 -- @default jira_issue_creation_date_from current_date - interval '15' day
 -- @param jira_issue_creation_date_to (Optional) Creation date of Jira issue is after or equal to jira_issue_creation_date_from. Format is YYYY-MM-DD.
 -- @type jira_issue_creation_date_to date
--- @default jira_issue_creation_date_to current_date - interval '15' day
+-- @default jira_issue_creation_date_to current_date
 -- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
 -- @type jira_project_key varchar
 -- @default jira_project_key null
