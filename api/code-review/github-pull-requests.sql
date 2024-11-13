@@ -1,3 +1,6 @@
+-- @param username jira username
+-- @type username varchar
+-- @default username null
 -- @param jira_key Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
