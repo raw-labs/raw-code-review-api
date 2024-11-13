@@ -4,9 +4,12 @@
 -- @param jira_key (Optional) Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
--- @param jira_issue_creation_date (Optional) Creation date of Jira issue
--- @type jira_issue_creation_date date
--- @default jira_issue_creation_date null
+-- @param jira_issue_creation_date_from (Optional) Creation date of Jira issue is before or equal to jira_issue_creation_date_to. Format is YYYY-MM-DD.
+-- @type jira_issue_creation_date_from date
+-- @default jira_issue_creation_date_from current_date - interval '15' day
+-- @param jira_issue_creation_date_to (Optional) Creation date of Jira issue is after or equal to jira_issue_creation_date_from. Format is YYYY-MM-DD.
+-- @type jira_issue_creation_date_to date
+-- @default jira_issue_creation_date_to current_date - interval '15' day
 -- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
 -- @type jira_project_key varchar
 -- @default jira_project_key null
@@ -64,9 +67,9 @@ jira_base AS (
         (not(:is_without_pull_request) AND prs.issue_keys IS NOT NULL)
     )
     AND (
-        (:jira_issue_creation_date IS NOT NULL AND jira_issue.created>=GREATEST(current_date - interval '15' day, :jira_issue_creation_date::timestamp)) 
-        OR 
-        (:jira_issue_creation_date IS NULL AND jira_issue.created>= current_date - interval '1' month)
+        ( jira_issue.created>=:jira_issue_creation_date_from )
+        AND
+        ( jira_issue.created<=:jira_issue_creation_date_to )
     )
     AND (
         jira_issue.project_key = :jira_project_key OR :jira_project_key IS NULL

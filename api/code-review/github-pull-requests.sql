@@ -9,10 +9,10 @@
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
 -- @default github_pull_request_number null
--- @param pr_creation_date_from Creation date of Github Pull Request is after or equal to pr_creation_date_from
+-- @param pr_creation_date_from Creation date of Github Pull Request is after or equal to pr_creation_date_from. Format is YYYY-MM-DD.
 -- @type pr_creation_date_from date
 -- @default pr_creation_date_from current_date - interval '15' day
--- @param pr_creation_date_to Creation date of Github Pull Request is before or equal to pr_creation_date_to
+-- @param pr_creation_date_to Creation date of Github Pull Request is before or equal to pr_creation_date_to. Format is YYYY-MM-DD.
 -- @type pr_creation_date_to date
 -- @default pr_creation_date_to current_date
 -- @param is_github_pull_request_open if true then search for open GitHub Pull Requests, else if it's false then search for closed ones, else search for both open and closed PRs. The default behaviour if no value is specified (hence NULL) is to retrieve all types of PRs
