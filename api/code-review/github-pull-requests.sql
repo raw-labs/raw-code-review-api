@@ -9,10 +9,13 @@
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
 -- @default github_pull_request_number null
--- @param pr_creation_date Creation date of Github Pull Request
--- @type pr_creation_date date
--- @default pr_creation_date current_date - interval '15' day
--- @param is_github_pull_request_open if true then search for open GitHub Pull Requests, else if it's false then search for closed ones, else search for both open and closed PRs
+-- @param pr_creation_date_from Creation date of Github Pull Request is after or equal to pr_creation_date_from
+-- @type pr_creation_date_from date
+-- @default pr_creation_date_from current_date - interval '15' day
+-- @param pr_creation_date_to Creation date of Github Pull Request is before or equal to pr_creation_date_to
+-- @type pr_creation_date_to date
+-- @default pr_creation_date_to current_date
+-- @param is_github_pull_request_open if true then search for open GitHub Pull Requests, else if it's false then search for closed ones, else search for both open and closed PRs. The default behaviour if no value is specified (hence NULL) is to retrieve all types of PRs
 -- @type is_github_pull_request_open boolean
 -- @default is_github_pull_request_open null
 -- @param page Current page number.
@@ -46,7 +49,7 @@ WITH prs AS (
     )
     AND github_pull_request.repository_full_name=:github_repository_full_name
     AND (github_pull_request.number=:github_pull_request_number OR :github_pull_request_number IS NULL)
-    AND (github_pull_request.created_at>=GREATEST(current_date - interval '15' day, :pr_creation_date))
+    AND (github_pull_request.created_at>=:pr_creation_date_from AND github_pull_request.created_at<=:pr_creation_date_to)
 ),
 jira_pr AS (
   SELECT
@@ -66,7 +69,7 @@ jira_pr AS (
   LEFT JOIN jira.jira_issue
     ON prs.title ilike CONCAT('%', jira_issue."key", '%')
   WHERE
-  (jira_issue.created>= (:pr_creation_date - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
+  (jira_issue.created>= (:pr_creation_date_from - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
   AND (jira_issue.assignee_display_name ilike concat('%', :username, '%') OR :username IS NULL)
   AND (jira_issue."key" ilike :jira_key OR :jira_key IS NULL)
 )
