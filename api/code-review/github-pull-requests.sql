@@ -63,7 +63,7 @@ jira_pr AS (
     jira_issue.assignee_display_name AS jira_assignee
   FROM
     prs
-  LEFT JOIN
+  LEFT JOIN jira_pr
     ON prs.title ilike CONCAT('%', jira.jira_issue, '%')
   WHERE
   (jira_issue.created>= (:pr_creation_date - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
