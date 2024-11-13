@@ -33,7 +33,6 @@ WITH prs AS (
     github_pull_request.author -> 'avatar_url' as author_github_avatar_url, 
     github_pull_request.author -> 'login' as author_github_username,
     github_pull_request.author -> 'url' as author_github_user_url, 
-   -- REGEXP_MATCHES(github_pull_request.title, '([A-Z]+-[0-9]+)', 'g') AS issue_keys,
     github_pull_request.assignees
   FROM
     github.github_pull_request 
@@ -65,8 +64,7 @@ jira_pr AS (
   FROM
     prs
   LEFT JOIN
--- jira.jira_issue ON jira_issue."key" = prs.issue_keys[1]
-    prs ON prs.title ilike concat('%', jira_issue."key", '%') 
+    prs.title ilike CONCAT('%', jira.jira_issue, '%')
   WHERE
   (jira_issue.created>= (:pr_creation_date - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
   AND (jira_issue.assignee_display_name ilike concat('%', :username, '%') OR :username IS NULL)

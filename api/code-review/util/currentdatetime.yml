@@ -8,7 +8,7 @@ metadata:
     - timestamp
     - date
     - datetime
-code: sql
+code: snapi
 codeFile: currentdatetime.snapi
 format: json
 security:
