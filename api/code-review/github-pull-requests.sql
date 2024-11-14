@@ -4,11 +4,11 @@
 -- @param jira_key Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
--- @param github_repository_full_name GitHub repository name
--- @type github_repository_full_name varchar
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
 -- @default github_pull_request_number -1
+-- @param github_repository_full_name GitHub repository name
+-- @type github_repository_full_name varchar
 -- @param pr_creation_date_from Creation date of Github Pull Request is after or equal to pr_creation_date_from. Format is YYYY-MM-DD.
 -- @type pr_creation_date_from date
 -- @default pr_creation_date_from current_date - interval '15' day
