@@ -17,7 +17,7 @@
 -- @type jira_issue_creation_date_to date
 -- @default jira_issue_creation_date_to current_date
 
--- @param jira_priority (Optional) Jira Priority. Choose between 'Highest', 'High', 'Medium', 'Low', 'Lowest'. If not specified, then issues of all priorities are processed.
+-- @param jira_priority (Optional) Jira Priority. Choose between 'Highest', 'High', 'Medium', 'Low', 'Lowest' and NULL. If not specified (NULL value), then issues of all priorities are processed.
 -- @type jira_priority varchar
 -- @default jira_priority null
 
@@ -25,15 +25,15 @@
 -- @type jira_project_key varchar
 -- @default jira_project_key null
 
--- @param is_without_pull_request (Optional) if true then search for Jira issues without any related GitHub Pull Requests, else if false search for Jira issues with GitHub Pull Request(s). The default behaviour if no value is specified (hence NULL), is to search for all issues.
+-- @param is_without_pull_request (Optional) if not specified (NULL value), which is the default, search for all Jira issues. If true then search for Jira issues without any related GitHub Pull Requests, else if false search for Jira issues with GitHub Pull Request(s).
 -- @type is_without_pull_request boolean
 -- @default is_without_pull_request null
 
--- @param is_jira_issue_open (Optional) if true then search for open Jira issues, else if false search for Closed, Done or Resolved Jira issues. The default behaviour if no value is specified (hence NULL), is to search for all issues
+-- @param is_jira_issue_open (Optional) if not specified (NULL value), which is the default, search for all Jira issues. If true then search for open Jira issues, else if false search for Closed, Done or Resolved Jira issues.
 -- @type is_jira_issue_open boolean
 -- @default is_jira_issue_open null
 
--- @param is_github_pull_request_open (Optional) if true then search for open GitHub Pull Requests, else if it's false then search for closed ones, else search for both open and closed PRs. The default behaviour if no value is specified (hence NULL) is to retrieve all types of PRs
+-- @param is_github_pull_request_open (Optional) if not specified (NULL value), which is the default, search for Jira issues with both open and closed Github PRs. If true then search for open GitHub Pull Requests, else if it's false then search for closed ones.
 -- @type is_github_pull_request_open boolean
 -- @default is_github_pull_request_open null
 
