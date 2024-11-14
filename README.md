@@ -22,11 +22,10 @@
    - [Filters](#filters)
    - [Pagination](#pagination)
 7. [Customization](#customization)
-8. [Contributing](#contributing)
-9. [Support and Troubleshooting](#support-and-troubleshooting)
-10. [License](#license)
-11. [Acknowledgements](#acknowledgements)
-12. [Contact](#contact)
+8. [Support and Troubleshooting](#support-and-troubleshooting)
+9. [License](#license)
+10. [Acknowledgements](#acknowledgements)
+11. [Contact](#contact)
 
 ---
 
@@ -34,11 +33,11 @@
 
 ### Description
 
-The **Code Reviewer API** provides a unified interface for integrating data from **GitHub** and **Jira** to enhance code review processes. It allows users to retrieve and analyze information related to pull requests, code reviews, comments, reviewers, and associated Jira issues. This API demonstrates how to seamlessly integrate multiple data sources using SQL queries within the RAW Labs platform, streamlining workflows and improving collaboration.
+The **Code Reviewer API** provides a unified interface for integrating data from **GitHub** and **Jira** to enhance code review processes. It allows users to retrieve and analyze information related to pull requests, code reviews, comments, reviewers, and associated Jira issues. This API demonstrates how to seamlessly integrate multiple data sources using SQL queries within the RAW platform, streamlining workflows and improving collaboration.
 
 ### How It Works
 
-The RAW Labs platform enables the creation of APIs by writing SQL queries that can access data from various sources, including GitHub and Jira. By leveraging these capabilities, the Code Reviewer API allows for real-time data retrieval and analysis without the need for data replication. The API facilitates interactions with GitHub pull requests and Jira issues, providing a consolidated view of the code review lifecycle.
+The RAW platform enables the creation of APIs by writing SQL queries that can access data from various sources, including GitHub and Jira. By leveraging these capabilities, the Code Reviewer API allows for real-time data retrieval and analysis without the need for data replication. The API facilitates interactions with GitHub pull requests and Jira issues, providing a consolidated view of the code review lifecycle.
 
 ### Features
 
@@ -52,8 +51,8 @@ The RAW Labs platform enables the creation of APIs by writing SQL queries that c
 
 ### Prerequisites
 
-- **RAW Labs Account**:
-  - An active RAW Labs account. [Sign up here](https://app.raw-labs.com/register) if you don't have one.
+- **RAW Account**:
+  - An active RAW account. [Sign up here](https://app.raw-labs.com/register) if you don't have one.
 - **GitHub Access**:
   - Access to GitHub repositories with pull requests.
   - Personal access tokens with appropriate scopes (e.g., `repo`, `read:org`).
@@ -66,18 +65,18 @@ The RAW Labs platform enables the creation of APIs by writing SQL queries that c
   - **Jira**:
     - API access enabled and credentials with read permissions.
 - **Dependencies**:
-  - Web browser to access RAW Labs, GitHub, and Jira.
+  - Web browser to access RAW, GitHub, and Jira.
   - Internet connectivity.
 
 ### Setup Instructions
 
-1. **Configure GitHub and Jira Connections in RAW Labs**:
-   - Follow the instructions in the [RAW Labs GitHub Data Source documentation](https://docs.raw-labs.com/sql/data-sources/github) and [RAW Labs Jira Data Source documentation](https://docs.raw-labs.com/sql/data-sources/jira) to set up your connections.
-   - Ensure that the necessary credentials and tokens are securely stored in RAW Labs.
+1. **Configure GitHub and Jira Connections in RAW**:
+   - Follow the instructions in the [RAW GitHub Data Source documentation](https://docs.raw-labs.com/sql/data-sources/github) and [RAW Jira Data Source documentation](https://docs.raw-labs.com/sql/data-sources/jira) to set up your connections.
+   - Ensure that the necessary credentials and tokens are securely stored in RAW.
 
 2. **Clone the Repository**:
-   - Clone this repository into your RAW Labs workspace.
-   - Use the RAW Labs platform to import the SQL queries and endpoint configurations.
+   - Clone this repository into your RAW workspace.
+   - Use the RAW platform to import the SQL queries and endpoint configurations.
 
 3. **Review SQL and YAML Files**:
    - Examine the provided `.sql` files, which contain the SQL queries for each endpoint.
@@ -87,12 +86,12 @@ The RAW Labs platform enables the creation of APIs by writing SQL queries that c
    - Adjust the SQL queries to fit your GitHub and Jira datasets if necessary.
    - Modify filters, parameters, or entities according to your data schema and organizational needs.
 
-5. **Deploy APIs in RAW Labs**:
-   - Use RAW Labs to publish the SQL queries as APIs.
+5. **Deploy APIs in RAW**:
+   - Use RAW to publish the SQL queries as APIs.
    - Refer to the [Publishing APIs documentation](https://docs.raw-labs.com/docs/publishing-api/overview) for guidance on deploying your APIs.
 
 6. **Test Your APIs**:
-   - Use RAW Labs' testing tools or external tools like Postman to test your APIs.
+   - Use RAW' testing tools or external tools like Postman to test your APIs.
    - Verify that the endpoints return the expected data and handle parameters correctly.
 
 ## Domain Entities
@@ -219,7 +218,7 @@ The Code Reviewer API provides several endpoints to interact with integrated dat
 
 Each SQL file corresponds to an API endpoint and contains the SQL query that retrieves the required data. The queries are parameterized to allow dynamic filtering based on user input.
 
-- **Parameters**: Defined at the top of each file using comments in the RAW Labs format (e.g., `-- @param`, `-- @type`, `-- @default`).
+- **Parameters**: Defined at the top of each file using comments in the RAW format (e.g., `-- @param`, `-- @type`, `-- @default`).
 - **CTEs (Common Table Expressions)**: Used to structure the query and handle intermediate results.
 - **Joins**: Utilized to combine data from GitHub and Jira sources.
 - **Filters**: Applied in the `WHERE` clause based on the parameters provided.
@@ -371,29 +370,10 @@ The Code Reviewer API template is designed to be adaptable to various developmen
 - **Adjust Parameters**: Modify or add parameters in the queries to support custom filters and data retrieval requirements.
 - **Enhance Functionality**: Integrate additional data sources or services to extend the capabilities of the API.
 
-## Contributing
-
-We welcome contributions to enhance the Code Reviewer API!
-
-- **Reporting Issues**:
-  - Submit issues via [GitHub Issues](https://github.com/raw-labs/code-reviewer-api/issues).
-
-- **Contributing Code**:
-  1. Fork the repository.
-  2. Create a feature branch: `git checkout -b feature/YourFeature`.
-  3. Commit your changes: `git commit -m 'Add YourFeature'`.
-  4. Push to the branch: `git push origin feature/YourFeature`.
-  5. Open a Pull Request with a detailed description of your changes.
-
-- **Code Guidelines**:
-  - Follow the [RAW Labs Coding Standards](https://docs.raw-labs.com/coding-standards).
-  - Write clear commit messages.
-  - Include documentation for new features.
-
 ## Support and Troubleshooting
 
 - **Documentation**:
-  - Refer to the [RAW Labs Documentation](https://docs.raw-labs.com/docs/) for detailed guides.
+  - Refer to the [RAW Documentation](https://docs.raw-labs.com/docs/) for detailed guides.
     - [Using Data Sources](https://docs.raw-labs.com/docs/sql/data-sources/overview)
     - [GitHub Data Source](https://docs.raw-labs.com/sql/data-sources/github)
     - [Jira Data Source](https://docs.raw-labs.com/sql/data-sources/jira)
@@ -412,7 +392,7 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Acknowledgements
 
 - **Contributors**: Thanks to all our contributors for their efforts.
-- **Third-Party Tools**: This template utilizes GitHub and Jira data sources and demonstrates integration with RAW Labs.
+- **Third-Party Tools**: This template utilizes GitHub and Jira data sources and demonstrates integration with RAW.
 
 ## Contact
 
@@ -425,9 +405,9 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 
 ## Additional Resources
 
-- **RAW Labs Documentation**: Comprehensive guides and references are available at [docs.raw-labs.com](https://docs.raw-labs.com/).
-- **GitHub Data Source**: Detailed instructions on connecting GitHub with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/github).
-- **Jira Data Source**: Detailed instructions on connecting Jira with RAW Labs can be found [here](https://docs.raw-labs.com/sql/data-sources/jira).
+- **RAW Documentation**: Comprehensive guides and references are available at [docs.raw-labs.com](https://docs.raw-labs.com/).
+- **GitHub Data Source**: Detailed instructions on connecting GitHub with RAW can be found [here](https://docs.raw-labs.com/sql/data-sources/github).
+- **Jira Data Source**: Detailed instructions on connecting Jira with RAW can be found [here](https://docs.raw-labs.com/sql/data-sources/jira).
 - **Publishing APIs**: Learn how to publish your SQL queries as APIs [here](https://docs.raw-labs.com/docs/publishing-api/overview).
-- **SQL Language**: Explore RAW Labs' SQL language for data manipulation [here](https://docs.raw-labs.com/sql/overview).
+- **SQL Language**: Explore RAW' SQL language for data manipulation [here](https://docs.raw-labs.com/sql/overview).
 
