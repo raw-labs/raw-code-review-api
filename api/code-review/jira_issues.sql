@@ -9,6 +9,14 @@
 -- @type jira_key varchar
 -- @default jira_key null
 
+-- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
+-- @type jira_project_key varchar
+-- @default jira_project_key null
+
+-- @param jira_priority (Optional) Jira Priority. Choose between 'Highest', 'High', 'Medium', 'Low', 'Lowest' and NULL. If not specified (NULL value), then issues of all priorities are processed.
+-- @type jira_priority varchar
+-- @default jira_priority null
+
 -- @param jira_issue_creation_date_from (Optional) Creation date of Jira issue is before or equal to jira_issue_creation_date_to. Format is YYYY-MM-DD.
 -- @type jira_issue_creation_date_from date
 -- @default jira_issue_creation_date_from current_date - interval '15' day
@@ -16,14 +24,6 @@
 -- @param jira_issue_creation_date_to (Optional) Creation date of Jira issue is after or equal to jira_issue_creation_date_from. Format is YYYY-MM-DD.
 -- @type jira_issue_creation_date_to date
 -- @default jira_issue_creation_date_to current_date
-
--- @param jira_priority (Optional) Jira Priority. Choose between 'Highest', 'High', 'Medium', 'Low', 'Lowest' and NULL. If not specified (NULL value), then issues of all priorities are processed.
--- @type jira_priority varchar
--- @default jira_priority null
-
--- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
--- @type jira_project_key varchar
--- @default jira_project_key null
 
 -- @param is_without_pull_request (Optional) if not specified (NULL value), which is the default, search for all Jira issues. If true then search for Jira issues without any related GitHub Pull Requests, else if false search for Jira issues with GitHub Pull Request(s).
 -- @type is_without_pull_request boolean

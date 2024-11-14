@@ -1,13 +1,21 @@
--- @param username jira username
+-- @param github_repository_full_name GitHub repository name
+-- @type github_repository_full_name varchar
+
+-- @param username (Optional) jira username
 -- @type username varchar
 -- @default username null
 
--- @param jira_key Jira Key
+-- @param jira_key (Optional) Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
 
--- @param github_repository_full_name GitHub repository name
--- @type github_repository_full_name varchar
+-- @param jira_project_key (Optional) Jira Project Key. If not specified, then issues from all projects are processed.
+-- @type jira_project_key varchar
+-- @default jira_project_key null
+
+-- @param jira_priority (Optional) Jira Priority. Choose between 'Highest', 'High', 'Medium', 'Low', 'Lowest' and NULL. If not specified (NULL value), then issues of all priorities are processed.
+-- @type jira_priority varchar
+-- @default jira_priority null
 
 -- @param github_pull_request_number GitHub pull request number
 -- @type github_pull_request_number integer
@@ -81,6 +89,15 @@ jira_pr AS (
   (jira_issue.created>= (:pr_creation_date_from - interval '15' day)) -- consider Jira issues created 15 days before opening the respective Github Pull Request
   AND (jira_issue.assignee_display_name ilike concat('%', :username, '%') OR :username IS NULL)
   AND (jira_issue."key" ilike :jira_key OR :jira_key IS NULL)
+  AND (
+      jira_issue.project_key = :jira_project_key OR :jira_project_key IS NULL
+  )
+  AND (
+      jira_issue."key" ilike :jira_key OR :jira_key IS NULL
+  )
+  AND (
+      upper(jira_issue.priority) = upper(:jira_priority) OR :jira_priority IS NULL
+  )
 )
 SELECT *
 FROM jira_pr
