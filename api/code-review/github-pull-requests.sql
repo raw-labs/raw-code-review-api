@@ -40,8 +40,8 @@ WITH prs AS (
   FROM
     github.github_pull_request 
   WHERE
---     (:github_pull_request_number=-1 OR github_pull_request.number=:github_pull_request_number)
---     AND 
+-- (:github_pull_request_number=-1 OR github_pull_request.number=:github_pull_request_number)
+-- AND 
     (
         (:is_github_pull_request_open IS NULL)
         OR
