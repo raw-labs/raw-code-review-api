@@ -48,7 +48,7 @@ WITH prs AS (
         (NOT(:is_github_pull_request_open) AND upper(github_pull_request.state) != 'OPEN')
     )
     AND github_pull_request.repository_full_name=:github_repository_full_name
-    -- AND (github_pull_request.number=:github_pull_request_number OR :github_pull_request_number IS NULL)
+    AND (:github_pull_request_number IS NULL OR github_pull_request.number=:github_pull_request_number)
     AND (github_pull_request.created_at>=:pr_creation_date_from AND github_pull_request.created_at<=:pr_creation_date_to)
 ),
 jira_pr AS (
