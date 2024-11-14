@@ -4,11 +4,11 @@
 -- @param jira_key Jira Key
 -- @type jira_key varchar
 -- @default jira_key null
--- @param github_pull_request_number GitHub pull request number
--- @type github_pull_request_number integer
--- @default github_pull_request_number -1
 -- @param github_repository_full_name GitHub repository name
 -- @type github_repository_full_name varchar
+-- @param github_pull_request_number GitHub pull request number
+-- @type github_pull_request_number integer
+-- @default github_pull_request_number null
 -- @param pr_creation_date_from Creation date of Github Pull Request is after or equal to pr_creation_date_from. Format is YYYY-MM-DD.
 -- @type pr_creation_date_from date
 -- @default pr_creation_date_from current_date - interval '15' day
@@ -40,8 +40,6 @@ WITH prs AS (
   FROM
     github.github_pull_request 
   WHERE
--- (:github_pull_request_number=-1 OR github_pull_request.number=:github_pull_request_number)
--- AND 
     (
         (:is_github_pull_request_open IS NULL)
         OR
@@ -49,6 +47,7 @@ WITH prs AS (
         OR
         (NOT(:is_github_pull_request_open) AND upper(github_pull_request.state) != 'OPEN')
     )
+    AND (:github_pull_request_number IS NULL OR github_pull_request.number=:github_pull_request_number)
     AND github_pull_request.repository_full_name=:github_repository_full_name
     AND (github_pull_request.created_at>=:pr_creation_date_from AND github_pull_request.created_at<=:pr_creation_date_to)
 ),
